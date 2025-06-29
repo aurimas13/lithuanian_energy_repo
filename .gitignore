@@ -19,3 +19,6 @@ logs/
 Miniforge3-MacOSX-arm64.sh
 extract_notebook_outputs.py
 extract-outputs.py
+/results/
+/results/figures/.gitkeep
+/results/tables/.gitkeep
