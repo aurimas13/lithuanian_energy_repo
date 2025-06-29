@@ -51,4 +51,4 @@ Evaluate electricity system imbalance trends, develop profitable trading strateg
 - **Konkurencinė rizika**: naujų dalyvių atėjimas / new entrant competition
 
 ---
-*Ataskaita parengta / Report prepared: 2025-06-29 11:52*
+*Ataskaita parengta / Report prepared: 2025-06-29 23:33*
