@@ -124,7 +124,7 @@ To regenerate all results:
 ```bash
 cd notebooks
 jupyter notebook lithuanian_energy_analysis.ipynb
-# Run all cells / Paleisti visas ląsteles
+# Run all cells / Paleisti visas lenteles
 ```
 
 Individual components:
