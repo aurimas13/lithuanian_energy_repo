@@ -57,7 +57,7 @@ This analysis examines three critical aspects of the Lithuanian electricity mark
 
 ```bash
 # 1. Clone repository / Klonuoti repozitoriją
-git clone https://github.com/yourusername/lithuanian-energy-analysis.git
+git clone https://github.com/aurimas13/lithuanian-energy-analysis.git
 cd lithuanian-energy-analysis
 
 # 2. Create virtual environment / Sukurti virtualią aplinką
