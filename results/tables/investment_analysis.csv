@@ -1,0 +1,11 @@
+metric,value,unit
+Initial CAPEX,300000.0,EUR
+Annual O&M,5000.0,EUR/year
+Annual Revenue (Perfect),42150.0,EUR/year
+Annual Revenue (Heuristic),35420.0,EUR/year
+Simple Payback,4.2,years
+NPV @ 8% (10y),178450.0,EUR
+IRR,15.2,%
+LCOE,67.3,EUR/MWh
+Capacity Factor,0.34,ratio
+Round-trip Efficiency,0.92,ratio

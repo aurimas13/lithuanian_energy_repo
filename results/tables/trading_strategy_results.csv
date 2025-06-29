@@ -1,0 +1,11 @@
+metric,value,unit
+Total Annual Profit,86890,EUR
+Number of Trades,1370,count
+Average Profit per Trade,63.42,EUR
+Win Rate,0.673,%
+Maximum Drawdown,-12450,EUR
+Sharpe Ratio,1.24,ratio
+Best Month,January,month
+Worst Month,July,month
+Trading Hours,17-20h,hours
+Average Position Size,1.0,MWh
