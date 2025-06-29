@@ -123,7 +123,7 @@ Formatted markdown report suitable for:
 To regenerate all results:
 ```bash
 cd notebooks
-jupyter notebook main_analysis.ipynb
+jupyter notebook lithuanian_energy_analysis.ipynb
 # Run all cells / Paleisti visas ląsteles
 ```
 
