@@ -1,23 +1,128 @@
-### 4. Demand Response Quantification / Paklausos Atsako Kiekybinis Įvertinimas
+**Risk Management**:# Detailed Methodology / Detali Metodologija 🔬
 
-**Scenario Analysis**:
-```python
-def calculate_dr_potential(elasticity, base_demand, price_increase_pct):
-    """
-    Calculate demand response using constant elasticity formula
-    ΔQ/Q = ε × ΔP/P
-    """
-    demand_change_pct = elasticity * price_increase_pct
-    demand_reduction_mwh = base_demand * abs(demand_change_pct) / 100
-    return demand_reduction_mwh
-```
+## Table of Contents / Turinys
 
-**Peak Shaving Potential**:
-- Base peak demand: 1,200 MWh (17-20h average)
-- Price signals tested: 5%, 10%, 15%, 20%
-- Elasticity applied: -0.234 (national) to -0.342 (industrial)
+1. [Overview / Apžvalga](#overview--apžvalga)
+2. [Data Collection & Preparation / Duomenų Rinkimas ir Paruošimas](#data-collection--preparation--duomenų-rinkimas-ir-paruošimas)
+3. [Part I: System Imbalance Analysis / Sistemos Disbalanso Analizė](#part-i-system-imbalance-analysis--sistemos-disbalanso-analizė)
+4. [Part II: Battery Storage Optimization / Baterijų Saugojimo Optimizavimas](#part-ii-battery-storage-optimization--baterijų-saugojimo-optimizavimas)
+5. [Part III: Demand Elasticity Estimation / Paklausos Elastingumo Vertinimas](#part-iii-demand-elasticity-estimation--paklausos-elastingumo-vertinimas)
+6. [Validation & Robustness / Validavimas ir Patikimumas](#validation--robustness--validavimas-ir-patikimumas)
 
 ---
+
+## Overview / Apžvalga
+
+This document provides a comprehensive technical description of the methodologies employed in the Lithuanian electricity market analysis. The analysis follows rigorous econometric and optimization techniques to ensure robust and reproducible results.
+
+Šis dokumentas pateikia išsamų techninį Lietuvos elektros rinkos analizėje naudotų metodologijų aprašymą. Analizė seka griežtas ekonometrines ir optimizavimo technikas, užtikrinant patikimus ir atkartojamus rezultatus.
+
+### Research Questions / Tyrimų Klausimai
+
+1. **RQ1**: Are there systematic patterns in electricity system imbalances that can be exploited for profit?
+2. **RQ2**: What is the optimal operation strategy for grid-scale battery storage in Lithuania?
+3. **RQ3**: How responsive is electricity demand to price changes, and what is the demand response potential?
+
+### Analytical Framework / Analitinė Sistema
+
+```
+Data Sources → Data Cleaning → Statistical Analysis → Optimization → Validation
+     ↓              ↓                ↓                    ↓             ↓
+  Raw Files    Standardization   Hypothesis Tests    Strategies    Backtesting
+```
+
+---
+
+## Data Collection & Preparation / Duomenų Rinkimas ir Paruošimas
+
+### 1. Data Sources / Duomenų Šaltiniai
+
+| Dataset | Source | Frequency | Period | Records |
+|---------|--------|-----------|--------|---------|
+| System Imbalance | Litgrid | Hourly | 2024-01-01 to 2024-12-31 | 8,784 |
+| Day-ahead Prices | Nord Pool | Hourly | 2024-01-01 to 2024-12-31 | 8,784 |
+| Weather Data | LHMT | Hourly | 2024-01-01 to 2024-12-31 | 8,784 |
+| National Demand | Litgrid | Hourly | 2024-01-01 to 2024-12-31 | 8,784 |
+| Object Consumption | Energy Cos | Hourly | 2024-01-01 to 2024-12-31 | 974,424 |
+
+### 2. Data Cleaning Process / Duomenų Valymo Procesas
+
+```python
+# Standardization pipeline
+def clean_data(df):
+    # 1. Handle missing values
+    df = df.interpolate(method='linear', limit=2)
+    
+    # 2. Remove outliers (IQR method)
+    Q1 = df.quantile(0.25)
+    Q3 = df.quantile(0.75)
+    IQR = Q3 - Q1
+    df = df[~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR)))]
+    
+    # 3. Ensure temporal consistency
+    df = df.sort_values('timestamp')
+    df = df.set_index('timestamp').asfreq('H')
+    
+    return df
+```
+
+### 3. Feature Engineering / Požymių Inžinerija
+
+Created temporal features for enhanced analysis:
+- `hour`: Hour of day (0-23)
+- `day_of_week`: Day of week (0-6)
+- `month`: Month (1-12)
+- `quarter`: Quarter (1-4)
+- `is_weekend`: Binary weekend indicator
+- `is_peak`: Peak hours indicator (17-20h)
+
+---
+
+## Part I: System Imbalance Analysis / Sistemos Disbalanso Analizė
+
+### 1. Hourly Pattern Detection / Valandinių Modelių Aptikimas
+
+**Methodology**: Group-wise statistical analysis with confidence intervals
+
+```python
+# Calculate hourly statistics
+hourly_stats = balancing_df.groupby('hour')['quantity_MWh'].agg([
+    'mean', 'std', 'count'
+])
+
+# 95% Confidence Intervals
+hourly_stats['ci95_low'] = hourly_stats['mean'] - 1.96 * hourly_stats['std'] / np.sqrt(hourly_stats['count'])
+hourly_stats['ci95_high'] = hourly_stats['mean'] + 1.96 * hourly_stats['std'] / np.sqrt(hourly_stats['count'])
+
+# Statistical significance test
+significant = (hourly_stats['ci95_low'] > 0) | (hourly_stats['ci95_high'] < 0)
+```
+
+**Statistical Tests Applied**:
+- **Null Hypothesis (H₀)**: Mean imbalance = 0 for each hour
+- **Alternative (H₁)**: Mean imbalance ≠ 0
+- **Test**: One-sample t-test for each hour
+- **Significance Level**: α = 0.05
+
+### 2. Temporal Stability Testing / Laiko Stabilumo Testavimas
+
+**Kruskal-Wallis Test** for quarterly differences:
+```python
+kw_stat, p_value = stats.kruskal(
+    *[df[df['quarter']==q]['quantity_MWh'] for q in range(1,5)]
+)
+```
+
+- **H₀**: Imbalance distributions are identical across quarters
+- **Result**: p = 0.082 → Fail to reject H₀ (patterns stable across year)# Detailed Methodology / Detali Metodologija 🔬
+
+## Table of Contents / Turinys
+
+1. [Overview / Apžvalga](#overview--apžvalga)
+2. [Data Collection & Preparation / Duomenų Rinkimas ir Paruošimas](#data-collection--preparation--duomenų-rinkimas-ir-paruošimas)
+3. [Part I: System Imbalance Analysis / Sistemos Disbalanso Analizė](#part-i-system-imbalance-analysis--sistemos-disbalanso-analizė)
+4. [Part II: Battery Storage Optimization / Baterijų Saugojimo Optimizavimas](#part-ii-battery-storage-optimization--baterijų-saugojimo-optimizavimas)
+5. [Part III: Demand Elasticity Estimation / Paklausos Elastingumo
 
 ## Validation & Robustness / Validavimas ir Patikimumas
 
@@ -80,6 +185,26 @@ ci_low, ci_high = np.percentile(results, [2.5, 97.5])
 - Stop-loss: Exit if cumulative loss > €10,000
 - Maximum exposure: 4 hours per day
 
+### 4. Demand Response Quantification / Paklausos Atsako Kiekybinis Įvertinimas
+
+**Scenario Analysis**:
+```python
+def calculate_dr_potential(elasticity, base_demand, price_increase_pct):
+    """
+    Calculate demand response using constant elasticity formula
+    ΔQ/Q = ε × ΔP/P
+    """
+    demand_change_pct = elasticity * price_increase_pct
+    demand_reduction_mwh = base_demand * abs(demand_change_pct) / 100
+    return demand_reduction_mwh
+```
+
+**Peak Shaving Potential**:
+- Base peak demand: 1,200 MWh (17-20h average)
+- Price signals tested: 5%, 10%, 15%, 20%
+- Elasticity applied: -0.234 (national) to -0.342 (industrial)
+
+---
 ---
 
 ## Part II: Battery Storage Optimization / Baterijų Saugojimo Optimizavimas
@@ -332,128 +457,4 @@ def trading_signal(hour, lag_imbalance, lag_price):
         return 0   # No position
 ```
 
-**Risk Management**:# Detailed Methodology / Detali Metodologija 🔬
 
-## Table of Contents / Turinys
-
-1. [Overview / Apžvalga](#overview--apžvalga)
-2. [Data Collection & Preparation / Duomenų Rinkimas ir Paruošimas](#data-collection--preparation--duomenų-rinkimas-ir-paruošimas)
-3. [Part I: System Imbalance Analysis / Sistemos Disbalanso Analizė](#part-i-system-imbalance-analysis--sistemos-disbalanso-analizė)
-4. [Part II: Battery Storage Optimization / Baterijų Saugojimo Optimizavimas](#part-ii-battery-storage-optimization--baterijų-saugojimo-optimizavimas)
-5. [Part III: Demand Elasticity Estimation / Paklausos Elastingumo Vertinimas](#part-iii-demand-elasticity-estimation--paklausos-elastingumo-vertinimas)
-6. [Validation & Robustness / Validavimas ir Patikimumas](#validation--robustness--validavimas-ir-patikimumas)
-
----
-
-## Overview / Apžvalga
-
-This document provides a comprehensive technical description of the methodologies employed in the Lithuanian electricity market analysis. The analysis follows rigorous econometric and optimization techniques to ensure robust and reproducible results.
-
-Šis dokumentas pateikia išsamų techninį Lietuvos elektros rinkos analizėje naudotų metodologijų aprašymą. Analizė seka griežtas ekonometrines ir optimizavimo technikas, užtikrinant patikimus ir atkartojamus rezultatus.
-
-### Research Questions / Tyrimų Klausimai
-
-1. **RQ1**: Are there systematic patterns in electricity system imbalances that can be exploited for profit?
-2. **RQ2**: What is the optimal operation strategy for grid-scale battery storage in Lithuania?
-3. **RQ3**: How responsive is electricity demand to price changes, and what is the demand response potential?
-
-### Analytical Framework / Analitinė Sistema
-
-```
-Data Sources → Data Cleaning → Statistical Analysis → Optimization → Validation
-     ↓              ↓                ↓                    ↓             ↓
-  Raw Files    Standardization   Hypothesis Tests    Strategies    Backtesting
-```
-
----
-
-## Data Collection & Preparation / Duomenų Rinkimas ir Paruošimas
-
-### 1. Data Sources / Duomenų Šaltiniai
-
-| Dataset | Source | Frequency | Period | Records |
-|---------|--------|-----------|--------|---------|
-| System Imbalance | Litgrid | Hourly | 2024-01-01 to 2024-12-31 | 8,784 |
-| Day-ahead Prices | Nord Pool | Hourly | 2024-01-01 to 2024-12-31 | 8,784 |
-| Weather Data | LHMT | Hourly | 2024-01-01 to 2024-12-31 | 8,784 |
-| National Demand | Litgrid | Hourly | 2024-01-01 to 2024-12-31 | 8,784 |
-| Object Consumption | Energy Cos | Hourly | 2024-01-01 to 2024-12-31 | 974,424 |
-
-### 2. Data Cleaning Process / Duomenų Valymo Procesas
-
-```python
-# Standardization pipeline
-def clean_data(df):
-    # 1. Handle missing values
-    df = df.interpolate(method='linear', limit=2)
-    
-    # 2. Remove outliers (IQR method)
-    Q1 = df.quantile(0.25)
-    Q3 = df.quantile(0.75)
-    IQR = Q3 - Q1
-    df = df[~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR)))]
-    
-    # 3. Ensure temporal consistency
-    df = df.sort_values('timestamp')
-    df = df.set_index('timestamp').asfreq('H')
-    
-    return df
-```
-
-### 3. Feature Engineering / Požymių Inžinerija
-
-Created temporal features for enhanced analysis:
-- `hour`: Hour of day (0-23)
-- `day_of_week`: Day of week (0-6)
-- `month`: Month (1-12)
-- `quarter`: Quarter (1-4)
-- `is_weekend`: Binary weekend indicator
-- `is_peak`: Peak hours indicator (17-20h)
-
----
-
-## Part I: System Imbalance Analysis / Sistemos Disbalanso Analizė
-
-### 1. Hourly Pattern Detection / Valandinių Modelių Aptikimas
-
-**Methodology**: Group-wise statistical analysis with confidence intervals
-
-```python
-# Calculate hourly statistics
-hourly_stats = balancing_df.groupby('hour')['quantity_MWh'].agg([
-    'mean', 'std', 'count'
-])
-
-# 95% Confidence Intervals
-hourly_stats['ci95_low'] = hourly_stats['mean'] - 1.96 * hourly_stats['std'] / np.sqrt(hourly_stats['count'])
-hourly_stats['ci95_high'] = hourly_stats['mean'] + 1.96 * hourly_stats['std'] / np.sqrt(hourly_stats['count'])
-
-# Statistical significance test
-significant = (hourly_stats['ci95_low'] > 0) | (hourly_stats['ci95_high'] < 0)
-```
-
-**Statistical Tests Applied**:
-- **Null Hypothesis (H₀)**: Mean imbalance = 0 for each hour
-- **Alternative (H₁)**: Mean imbalance ≠ 0
-- **Test**: One-sample t-test for each hour
-- **Significance Level**: α = 0.05
-
-### 2. Temporal Stability Testing / Laiko Stabilumo Testavimas
-
-**Kruskal-Wallis Test** for quarterly differences:
-```python
-kw_stat, p_value = stats.kruskal(
-    *[df[df['quarter']==q]['quantity_MWh'] for q in range(1,5)]
-)
-```
-
-- **H₀**: Imbalance distributions are identical across quarters
-- **Result**: p = 0.082 → Fail to reject H₀ (patterns stable across year)# Detailed Methodology / Detali Metodologija 🔬
-
-## Table of Contents / Turinys
-
-1. [Overview / Apžvalga](#overview--apžvalga)
-2. [Data Collection & Preparation / Duomenų Rinkimas ir Paruošimas](#data-collection--preparation--duomenų-rinkimas-ir-paruošimas)
-3. [Part I: System Imbalance Analysis / Sistemos Disbalanso Analizė](#part-i-system-imbalance-analysis--sistemos-disbalanso-analizė)
-4. [Part II: Battery Storage Optimization / Baterijų Saugojimo Optimizavimas](#part-ii-battery-storage-optimization--baterijų-saugojimo-optimizavimas)
-5. [Part III: Demand Elasticity Estimation / Paklausos Elastingumo
