@@ -86,7 +86,7 @@ jupyter notebook notebooks/lithuanian_energy_analysis.ipynb
 - **Objective**: Evaluate economic viability of grid-scale batteries
 - **Methods**: Heuristic, perfect forecast, and flexible optimization strategies
 - **Key Finding**: 15.2% ROI achievable with smart operation
-- **Output**: [`results/tables/battery_strategy_comparison.csv`](results/tables/)
+- **Output**: [`results/figures/flexible_optimization.png`](results/figures/) 
 
 ### 3. Demand Elasticity Estimation / Paklausos Elastingumo Vertinimas
 - **Objective**: Quantify consumer response to price signals
@@ -94,7 +94,7 @@ jupyter notebook notebooks/lithuanian_energy_analysis.ipynb
 - **Key Finding**: -0.23 elasticity indicates limited demand response potential
 - **Output**: [`results/figures/elasticity_by_consumer_type.png`](results/figures/)
 
-## 📈 Visual Results Gallery / Vizualių Rezultatų Galerija
+## 📈 Visual Results Gallery / Vizualių Rezultatų Galerija 
 
 ### System Patterns / Sistemos Modeliai
 ![Hourly Imbalance](results/figures/hourly_imbalance_patterns.png)
