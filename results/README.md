@@ -159,7 +159,7 @@ For questions about specific results:
 - Check notebook markdown cells for methodology
 - See `docs/methodology.md` for detailed approach
 - Review `data/data_dictionary.md` for variable definitions
-- Contact: your.email@example.com
+- Contact: aurimas.nausedas@proton.me
 
 ---
 
