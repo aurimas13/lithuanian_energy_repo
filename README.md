@@ -145,7 +145,7 @@ Full methodology details in [`docs/methodology.md`](docs/methodology.md)
 
 - [Detailed Methodology](docs/methodology.md) - Complete technical approach
 - [API Reference](docs/api_reference.md) - Function documentation
-- [Data Dictionary](data/data_dictionary.md) - Variable definitions
+- [Data Dictionary](docs/data_dictionary.md) - Variable definitions
 - [Results Interpretation](docs/results_interpretation.md) - How to read outputs
 
 ## 🤝 Contributing / Prisidėjimas
