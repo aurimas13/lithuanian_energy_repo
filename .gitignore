@@ -1,8 +1,7 @@
 .DS_Store
 /notebooks/lithuanian_energy_analysis_pre_final.ipynb
 /notebooks/lithuanian_energy_analysis_final.ipynb
-/notebooks/lithuanian_energy_analysis_first.ipynb
-.binder/
+/notebooks/old/
 # Ignore Jupyter Notebook metadata
 **/.vscode/
 # Ignore Python cache files
