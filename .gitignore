@@ -1,0 +1,22 @@
+.DS_Store
+/notebooks/lithuanian_energy_analysis_pre_final.ipynb
+/notebooks/lithuanian_energy_analysis_first.ipynb
+.binder/
+# Ignore Jupyter Notebook checkpoints
+**/.ipynb_checkpoints
+# Ignore Jupyter Notebook metadata
+**/.vscode/
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+# Ignore virtual environment directories
+env/
+.venv
+.venv/
+# Ignore logs
+logs/
+*.log
+# Ignore compiled Python files
+*.pyc
+Miniforge3-MacOSX-arm64.sh
+extract_notebook_outputs.py
