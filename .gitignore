@@ -18,3 +18,4 @@ logs/
 *.pyc
 Miniforge3-MacOSX-arm64.sh
 extract_notebook_outputs.py
+extract-outputs.py
