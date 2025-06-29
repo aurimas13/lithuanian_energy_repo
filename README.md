@@ -71,7 +71,7 @@ pip install -r requirements.txt
 cd data && unzip data.zip && cd ..
 
 # 5. Run analysis / Paleisti analizę
-jupyter notebook notebooks/main_analysis.ipynb
+jupyter notebook notebooks/lithuanian_energy_analysis.ipynb
 ```
 
 ## 📊 Main Analysis Components / Pagrindiniai Analizės Komponentai
@@ -165,8 +165,9 @@ MIT License - see [LICENSE](LICENSE) for details. Free to use with attribution.
 ## 📧 Contact / Kontaktai
 
 **Author / Autorius**: Aurimas A. Nausėdas  
-**Email**: your.email@example.com  
-**LinkedIn**: [Profile](https://linkedin.com/in/yourprofile)
+**Email**: aurimas.nausedas@proton.me  
+**LinkedIn**: [Profile](https://linkedin.com/in/aurimasnausedas)  
+**GitHub**: [Profile](https://github.com/aurimas13)
 
 For questions or collaboration / Klausimams ar bendradarbiavimui
 
