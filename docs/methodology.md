@@ -1,4 +1,4 @@
-**Risk Management**:# Detailed Methodology / Detali Metodologija 🔬
+**Risk Management**: # Detailed Methodology / Detali Metodologija 🔬
 
 ## Table of Contents / Turinys
 
