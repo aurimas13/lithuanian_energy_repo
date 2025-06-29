@@ -1,4 +1,0 @@
-strategy,annual_profit_eur,daily_avg_eur,avg_cycles_per_day,efficiency_vs_perfect,implementation_complexity,data_requirements
-Heuristic,35420,97.04,2.0,0.84,Low,Historical averages
-Perfect Forecast,42150,115.48,2.0,1.0,Medium,Perfect price forecast
-Flexible Optimization,43890,120.25,1.7,1.041,High,Full year optimization

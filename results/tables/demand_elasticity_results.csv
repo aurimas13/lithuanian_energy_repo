@@ -1,7 +1,0 @@
-consumer_type,price_elasticity,std_error,r_squared,sample_size,temp_coefficient
-National Average,-0.234,0.021,0.412,8784,0.0234
-Industrial,-0.342,0.045,0.523,2196,0.0198
-Commercial,-0.198,0.067,0.298,4392,0.0267
-Small Business,-0.156,0.089,0.234,2196,0.0312
-Peak Hours,-0.287,0.034,0.389,1460,0.0245
-Off-Peak Hours,-0.189,0.043,0.367,7324,0.0223
