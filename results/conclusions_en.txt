@@ -1,0 +1,40 @@
+
+LITHUANIAN ELECTRICITY MARKET ANALYSIS CONCLUSIONS
+Analysis date: 2025-06-29
+
+1. SYSTEM IMBALANCE ANALYSIS
+- Average imbalance: 30.3 MWh (σ = 89.8 MWh)
+- Significant imbalance hours: 24 out of 24
+- Peak deficit hours: [] (evening peak)
+- Peak surplus hours: [0, 1, 2] (night)
+- Price sensitivity to imbalance: -0.784 EUR/MWh per MWh
+
+2. TRADING STRATEGY PERFORMANCE
+- Annual profit: €-86,890
+- Trades executed: 260
+- Average profit per trade: €-334.19
+- Trading frequency: 1.7% of hours
+
+3. BATTERY STORAGE ECONOMICS
+- Heuristic strategy profit: €157,973/year
+- Perfect forecast profit: €157,973/year
+- Flexible strategy profit: €153,676/year
+- Payback period: 2.0 years
+- ROI: 51.0%
+
+4. DEMAND ELASTICITY
+- National price elasticity: 0.042
+- Object average elasticity: 0.122
+- Demand is inelastic
+- 10% price increase → 0.4% demand reduction
+
+5. INVESTMENT RECOMMENDATIONS
+- 1MW/2MWh battery system can generate €157,973 annual profit
+- Algorithmic trading added value: €-86,890/year
+- Combined strategy (battery + trading): €71,083/year
+- Recommend starting with smaller system (0.5MW) for pilot project
+
+6. MARKET RISKS
+- Renewable expansion changing imbalance patterns
+- Regulatory changes may affect imbalance prices
+- Competition will increase as more flexibility resources deployed

@@ -1,0 +1,31 @@
+{
+  "analysis_date": "2025-06-29 11:52:23",
+  "total_hours_analyzed": 15311,
+  "imbalance_mean_mwh": 30.331272222585067,
+  "imbalance_std_mwh": 89.76842361665904,
+  "imbalance_skewness": 0.14188931716952932,
+  "significant_imbalance_hours": 24,
+  "peak_deficit_hours": [],
+  "peak_surplus_hours": [
+    0,
+    1,
+    2
+  ],
+  "trading_annual_profit_eur": -86889.68,
+  "trading_trades_executed": 260,
+  "trading_avg_profit_per_trade_eur": -334.1910769230769,
+  "trading_frequency_pct": 1.6981255306642282,
+  "battery_heuristic_profit_eur": 157972.82219130435,
+  "battery_perfect_profit_eur": 157972.82219130435,
+  "battery_flexible_profit_eur": 153675.73845217391,
+  "battery_efficiency_pct": 100.0,
+  "battery_payback_years": 1.9611326750893487,
+  "battery_roi_pct": 50.99094073043479,
+  "national_price_elasticity": 0.04197412617239844,
+  "object_mean_elasticity": 0.12218737482916744,
+  "elasticity_heterogeneity_std": 0.12358039360491609,
+  "price_mean_eur_mwh": 90.88448985408117,
+  "price_std_eur_mwh": 64.0062018451447,
+  "price_volatility_eur_mwh": 64.0062018451447,
+  "price_cv": 0.7042588009011144
+}

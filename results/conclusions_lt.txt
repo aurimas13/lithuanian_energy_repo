@@ -1,0 +1,40 @@
+
+LIETUVOS ELEKTROS RINKOS ANALIZĖS IŠVADOS
+Analizės data: 2025-06-29
+
+1. SISTEMOS DISBALANSO ANALIZĖ
+- Vidutinis disbalansas: 30.3 MWh (σ = 89.8 MWh)
+- Reikšmingos disbalanso valandos: 24 iš 24
+- Pagrindinės trūkumo valandos: [] (vakaro pikas)
+- Pagrindinės pertekliaus valandos: [0, 1, 2] (naktis)
+- Disbalanso kainos jautrumas kiekiui: -0.784 EUR/MWh už MWh
+
+2. PREKYBOS STRATEGIJOS REZULTATAI
+- Metinis pelnas: €-86,890
+- Įvykdyta sandorių: 260
+- Vidutinis pelnas už sandorį: €-334.19
+- Prekybos dažnis: 1.7% valandų
+
+3. BATERIJŲ SAUGOJIMO EKONOMIKA
+- Euristinės strategijos pelnas: €157,973/metus
+- Tobulos prognozės pelnas: €157,973/metus
+- Lanksčios strategijos pelnas: €153,676/metus
+- Atsipirkimo laikas: 2.0 metų
+- ROI: 51.0%
+
+4. PAKLAUSOS ELASTINGUMAS
+- Nacionalinis kainos elastingumas: 0.042
+- Objektų vidutinis elastingumas: 0.122
+- Paklausa yra neelastinga
+- 10% kainos padidėjimas → 0.4% paklausos sumažėjimas
+
+5. INVESTICIJŲ REKOMENDACIJOS
+- 1MW/2MWh baterijos sistema gali generuoti €157,973 metinio pelno
+- Algoritminio prekybos pridėtinė vertė: €-86,890/metus
+- Kombinuota strategija (baterija + prekyba): €71,083/metus
+- Rekomenduojama pradėti nuo mažesnės sistemos (0.5MW) pilotiniam projektui
+
+6. RINKOS RIZIKOS
+- Atsinaujinančių šaltinių plėtra keičia disbalanso modelius
+- Reguliaciniai pokyčiai gali paveikti disbalanso kainas
+- Konkurencija didės diegiant daugiau lankstumo išteklių
