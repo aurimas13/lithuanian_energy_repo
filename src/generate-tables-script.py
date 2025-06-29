@@ -148,8 +148,4 @@ if __name__ == "__main__":
         df = pd.read_csv(table_file)
         print(df.head())
         print(f"Shape: {df.shape}")
-
-
-
-
-
+        
