@@ -1,14 +1,14 @@
 # Nord Pool Vartotojų Elgsenos Paradokso Tyrimas: Ar Žemos Kainos Lemia Didesnius Mokėjimus?
 
 **Tyrimo ataskaita**  
-**Data**: 2024-06-29  
+**Data**: 2025-07-07  
 **Autorius**: Aurimas A. Nausėdas
 
 ---
 
 ## Santrauka
 
-Šis tyrimas analizuoja paradoksalų reiškinį Lietuvos elektros rinkoje: ar vartotojai, reaguodami į Nord Pool biržos kainas, elgiasi taip intensyviai, kad žemų kainų metu sumoka **daugiau** nei aukštų kainų metu? 
+Šiuo tyrimu išanalizavau paradoksalų reiškinį Lietuvos elektros rinkoje: ar vartotojai, reaguodami į Nord Pool biržos kainas, elgiasi taip intensyviai, kad žemų kainų metu sumoka **daugiau** nei aukštų kainų metu? 
 
 **PAGRINDINIS RADINYS**: Paradoksas patvirtintas! Analizė atskleidė, kad:
 - Esant **žemoms kainoms** (vid. 45 EUR/MWh), vartotojai moka **83,485 EUR** 
@@ -27,27 +27,31 @@
 
 Paradoksas įmanomas kai elastingumas |ε| > 1:
 - Nustatytas nacionalinis elastingumas: **-1.5**
-- Tai reiškia: 1% kainos ↑ → 1.5% suvartojimo ↓
+- Tai reiškia: 1% kainos ↑ (didėja) → 1.5% suvartojimo ↓ (mažėja)
 - **Suvartojimas keičiasi GREIČIAU nei kaina**
 
 ## 2. Empiriniai įrodymai
 
 ### 2.1 Mokėjimai pagal kainų kategorijas
 
-| Kainos kategorija | Vid. kaina | Vid. suvartojimas | Vid. mokėjimas | % nuo aukštos |
-|-------------------|------------|-------------------|----------------|---------------|
-| **Žema** | 45.2 EUR/MWh | 1,847 MWh | **83,485 EUR** | +12.6% |
-| Vidutinė | 69.8 EUR/MWh | 1,203 MWh | 83,969 EUR | +13.2% |
-| **Aukšta** | 94.6 EUR/MWh | 784 MWh | **74,166 EUR** | 100% |
+| Kainos kategorija | Vid. kaina   | Vid. suvartojimas | Vid. mokėjimas | % nuo aukštos |
+|-------------------|--------------|-------------------|----------------|---------------|
+| **Žema**          | 45.2 EUR/MWh | 1,847 MWh         | **83,485 EUR** | +12.6%        |
+| Vidutinė          | 69.8 EUR/MWh | 1,203 MWh         | 83,969 EUR     | +13.2%        |
+| **Aukšta**        | 94.6 EUR/MWh | 784 MWh           | **74,166 EUR** | 100%          |
 
 **PARADOKSAS**: Žemiausios kainos → Didžiausi mokėjimai!
 
+Įrodymas jau randamas  patikrinus susieto notebook'o (*03_demand_elasticity_nord_pool.ipynb*) 3-ią dalį kur kai žema kaina - 34.71 (vidurkis)- suvartojams kiekis didesnis - 4665.76 (vidurkis) - nei kai kaina aukšta - 105.26 (vidurkis), o suvartojamas kiekis mažesnis - 612.91 (vidurkis).
+
+Įrodymas taip pat gražiai matomas vizualiai iš notebook'o ketvirto skyriaus ketvirto grafiko - ***Paros profilis: Kaina vs Suvartojimas vs Mokėjimas***.
+
 ### 2.2 Koreliacijos analizė
 
-- **Kaina ↔ Mokėjimas**: r = **-0.624** (stipri neigiama koreliacija)
-- **Kaina ↔ Suvartojimas**: r = **-0.897** (labai stipri neigiama)
+- **Kaina ↔ Mokėjimas**: r = **-0.904** (labai stipri neigiama koreliacija)
+- **Kaina ↔ Suvartojimas**: r = **-0.665** (stipri neigiama koreliacija)
 
-**Interpretacija**: Kuo aukštesnė kaina, tuo MAŽESNIS mokėjimas!
+**Interpretacija**: Kuo aukštesnė kaina, tuo MAŽESNIS suvartojimas!
 
 ### 2.3 Tikimybinė analizė
 
@@ -57,17 +61,38 @@ Paradoksas įmanomas kai elastingumas |ε| > 1:
 
 Beveik **kas antras** žemos kainos atvejis lemia didelius mokėjimus!
 
-## 3. Vizualūs įrodymai
+Matyti iš 4 skyriaus 5-o grafiko.
 
-### 3.1 Mokėjimų paradoksas grafikuose
+## 3. Kiti rezultatai
+
+### 3.1 Elastingumo įtaka
+
+Kritinis elastingumo lygis paradoksui: **|ε| > 1.0**
+
+| Vartotojų tipas       | Elastingumas | Paradoksas? |
+|-----------------------|--------------|-------------|
+| Nacionalinis vidurkis | -1.5         | ✓ Taip |
+| Pramonė               | -1.8         | ✓ Taip |
+| Komercija             | -0.9         | ✗ Ne |
+| Smulkus verslas       | -0.6         | ✗ Ne |
+
+### 3.2 Paros profilio analizė
+
+**Stipriausias paradoksas**:
+- **3-6 val. ryto**: Žemiausios kainos, bet didžiausi mokėjimai
+- **17-20 val. vakaro**: Aukščiausios kainos, bet vidutiniai mokėjimai
+
+## 4. Vizualūs įrodymai
+
+### 4.1 Mokėjimų paradoksas grafikuose
 
 1. **Stulpelinė diagrama**: Aiškiai matosi, kad žemų kainų stulpelis (žalias) aukštesnis už aukštų kainų (raudonas)
 
-2. **Regresijos analizė**: Neigiamas nuolydis (-784.5) rodo, kad kainai didėjant mokėjimai MAŽĖJA
+2. **Regresijos analizė**: Neigiamas nuolydis (-925.3) rodo, kad kainai didėjant mokėjimai MAŽĖJA
 
 3. **Kryžminė lentelė**: 45% žemų kainų atvejų patenka į "didelių mokėjimų" kategoriją
 
-### 3.2 Paros profilio paradoksas
+### 4.2 Paros profilio paradoksas
 
 **Nakties paradoksas (3-6 val.)**:
 - Žemiausios paros kainos
@@ -79,29 +104,31 @@ Beveik **kas antras** žemos kainos atvejis lemia didelius mokėjimus!
 - Sumažėjęs suvartojimas
 - Rezultatas: vidutiniai mokėjimai
 
-## 4. Elastingumo slenksčio analizė
+## 5. Elastingumo slenksčio analizė
 
-### 4.1 Kada atsiranda paradoksas?
+### 5.1 Kada atsiranda paradoksas?
 
 Analizė parodė kritinį elastingumo lygį:
 
-| Elastingumas | Mokėjimų elgsena | Paradoksas |
-|--------------|------------------|------------|
-| 0 iki -0.5 | Mokėjimai didėja su kaina | NE |
-| -0.5 iki -1.0 | Mokėjimai beveik stabilūs | RIBINIS |
-| **< -1.0** | **Mokėjimai mažėja su kaina** | **TAIP** |
-| -1.5 (faktinis) | Stiprus paradoksas | **TAIP** |
+| Elastingumas    | Mokėjimų elgsena              | Paradoksas |
+|-----------------|-------------------------------|------------|
+| 0 iki -0.5      | Mokėjimai didėja su kaina     | NE         |
+| -0.5 iki -1.0   | Mokėjimai beveik stabilūs     | RIBINIS    |
+| **< -1.0**      | **Mokėjimai mažėja su kaina** | **TAIP**.  |
+| -1.5 (faktinis) | Stiprus paradoksas            | **TAIP**   |
 
-### 4.2 Individualių vartotojų analizė
+Matyti iš 4 skyriaus 6-o grafiko, kai elastingumui esant žemam (žalia spalva) - kaina didelė ir paradoksas patvirtintas.
+
+### 5.2 Individualių vartotojų analizė
 
 Iš 20 simuliuotų verslo objektų:
 - **75%** rodo paradoksalų elgesį (|ε| > 1)
 - **25%** tradicinis elgesys
 - Vidutinis elastingumas: **-1.34**
 
-## 5. Praktinės pasekmės
+## 6. Praktinės pasekmės
 
-### 5.1 Finansinis paradoksas vartotojams
+### 6.1 Finansinis paradoksas vartotojams
 
 **Metiniai mokėjimai** (simuliacija):
 - Fiksuoto tarifo atveju: ~730,000 EUR/metus
@@ -110,15 +137,15 @@ Iš 20 simuliuotų verslo objektų:
 
 **Paradoksas**: Dinaminis tarifas, skirtas taupyti, iš tikrųjų PADIDINA sąskaitas!
 
-### 5.2 Kodėl tai vyksta?
+### 6.2 Kodėl tai vyksta?
 
 1. **Pernelyg stipri reakcija**: Vartotojai "persistengia" reaguodami į kainas
 2. **Asimetrija**: Suvartojimo padidėjimas žemų kainų metu > sumažėjimas aukštų kainų metu
 3. **Bazinio poreikio ignoravimas**: Net esant aukštoms kainoms, yra minimalus poreikis
 
-## 6. Rekomendacijos
+## 7. Rekomendacijos
 
-### 6.1 Vartotojams - KAIP IŠVENGTI PARADOKSO
+### 7.1 Vartotojams - KAIP IŠVENGTI PARADOKSO
 
 1. **Riboti maksimalų suvartojimą** net kai kainos žemos
    - Nustatyti "lubas": max 150% įprasto suvartojimo
@@ -131,21 +158,21 @@ Iš 20 simuliuotų verslo objektų:
    - Svarbu: Kaina × Kiekis, ne tik kaina
    - Nustatyti mokėjimų biudžetą
 
-### 6.2 Tiekėjams
+### 7.2 Tiekėjams
 
 **Nauji produktai**:
 - "Paradokso apsauga" - mokėjimų ribojimas
 - Hibridiniai tarifai su apsauga
 - Mokėjimų prognozavimo įrankiai
 
-### 6.3 Reguliatoriui
+### 7.3 Reguliatoriui
 
 **Politikos persvatymas**:
 - Dinaminis tarifas gali **padidinti** vartotojų išlaidas
 - Reikalinga edukacija apie optimalią reakciją
 - Svarstyti mokėjimų, ne tik kainų, reguliavimą
 
-## 7. Išvados
+## 8. Išvados
 
 1. **PARADOKSAS EGZISTUOJA**: Lietuvos vartotojai moka 12.6% daugiau žemų kainų metu
 
@@ -157,7 +184,7 @@ Iš 20 simuliuotų verslo objektų:
 
 5. **SPRENDIMAS**: Riboti reakciją, siekti vieneto elastingumo
 
-## 8. Tyrimo reikšmė
+## 9. Tyrimo reikšmė
 
 Šis tyrimas pirmą kartą Lietuvoje įrodo, kad:
 - Vartotojų reakcija į kainas gali būti **per stipri**
